@@ -1,8 +1,14 @@
 ---
   - name: Instalacao teste
     hosts: automacao
+      http_port:5985
+      [automacao:vars]
+      ansible_user=ansible
+      ansible_password=ansible
+      ansible_connection=winrm
+      ansible_winrm_server_cert_validation=ignore
     tasks:
     - name: Download do arquivo
-      win_get_url:
+      ansible.windows.win_get_url:
         url: https://ip225.ip-149-56-155.net/owncloud/s/x90TGZ17XcMN4uG
         dest: C:\Drivers e Utilitarios\CH_SHOP.exe
