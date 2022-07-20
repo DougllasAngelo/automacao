@@ -1,3 +1,4 @@
+---  
   - name: 192.168.88.216
     tasks:
     - name: Instalação Net Framework 3.5 
