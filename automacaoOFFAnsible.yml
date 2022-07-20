@@ -1,5 +1,5 @@
 ---
   - name: automacao
-    task:
-    ansible.windows.win_reboot:
-      reboot_timeout: 3600
+      task:
+        ansible.windows.win_reboot:
+        reboot_timeout: 3600
