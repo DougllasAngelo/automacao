@@ -1,5 +1,5 @@
   - name: Instalacao teste
-    hosts: all
+    hosts: automacao
     tasks:
     - name: Instalação Net Framework 3.5 
       win_optional_feature:
