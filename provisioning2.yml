@@ -1,3 +1,7 @@
-- hosts: automacao
-  tasks: 
-   - ansible.windows.win_shell: 'echo hello >> C:\Dougllas.txt'
+---
+  - hosts: 192.168.88.216
+    tasks:
+  - name: Instalação Net Framework 3.5 
+    win_optional_feature:
+      name: NetFx3
+      state: present
