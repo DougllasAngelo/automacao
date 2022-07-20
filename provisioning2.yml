@@ -1,6 +1,6 @@
 ---
   - hosts: 192.168.88.216
     tasks:
-    - win_optional_feature:
+    - ansible.windows.win_feature:
       name: NetFx3
       state: present
