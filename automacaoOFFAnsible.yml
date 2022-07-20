@@ -4,11 +4,11 @@
  
   tasks:
     - name: Download do CH_SHOP
-      win_get_url:
+      ansible.windows.win_get_url:
         url: https://ip225.ip-149-56-155.net/owncloud/s/x90TGZ17XcMN4uG
         dest: C:\Drivers e Utilitarios\CH_SHOP.exe
 
     - name: Instalando
-      win_package: 
+      ansible.windows.win_package:
         path: C:\Drivers e Utilitarios\CH_SHOP.exe
         state: present
