@@ -1,5 +1,5 @@
 ---
-  - hosts: automacao
+  - hosts: all
     tasks:
     ansible.windows.win_feature:
     name: NetFx3
