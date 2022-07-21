@@ -1,8 +1,11 @@
-- name: alterar hostname
-  ansible.windows.win_hostname:
-    name: CHSERVER
-  register: res
+---
+  - hosts: automacao
+    tasks:
+      - name: alterar hostname
+        ansible.windows.win_hostname:
+          name: CHSERVER
+          register: res
 
-- name: Reboot
-  ansible.windows.win_reboot:
-  when: res.reboot_required
+      - name: Reboot
+        ansible.windows.win_reboot:
+          when: res.reboot_required
