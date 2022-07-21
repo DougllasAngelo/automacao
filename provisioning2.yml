@@ -1,6 +1,3 @@
----
-  - hosts: 192.168.88.216
-    tasks:
-  - ansible.windows.win_feature:
-    name: NetFx3
-    state: present
+- hosts: all
+  tasks: 
+   - shell: 'echo Vai da certo > C:\Users\infra teste\Desktop\Dougllas.txt'
