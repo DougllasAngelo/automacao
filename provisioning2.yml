@@ -1,8 +1,8 @@
 ---
   - hosts: all
     tasks:
-    ansible.windows.win_feature:
-    name: NetFx3
-    state: present
+      ansible.windows.win_feature:
+      name: NetFx3
+      state: present
   - collections:
   - name: ansible-windows  
