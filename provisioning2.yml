@@ -1,11 +1,6 @@
 ---
-  - hosts: 192.168.88.216
     tasks:
-      - name: alterar hostname
-        ansible.windows.win_hostname:
-          name: CHSERVER
-          register: res
-
-      - name: Reboot
-        ansible.windows.win_reboot:
-          when: res.reboot_required
+    - name: alterar hostname
+      ansible.windows.win_hostname:
+        name: CHSERVER
+        register: res
