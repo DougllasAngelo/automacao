@@ -1,5 +1,5 @@
 ---
-  - hosts: automacao
+  - hosts: 192.168.88.216
     tasks:
       - name: alterar hostname
         ansible.windows.win_hostname:
