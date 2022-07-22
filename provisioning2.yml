@@ -1,5 +1,8 @@
 ---
-    tasks:
+- name: primeiro playbook
+  hosts: 192.168.8.216
+  
+  tasks:
     - name: alterar hostname
       ansible.windows.win_hostname:
         name: CHSERVER
