@@ -1,9 +1,8 @@
 ---
-- name: primeiro playbook
-  hosts: 192.168.8.216
-  
+- name: win_ping module demo
+  hosts: windows
+  become: false
+  gather_facts: false
   tasks:
-    - name: alterar hostname
-      ansible.windows.win_hostname:
-        name: CHSERVER
-        register: res
+    - name: test connection
+      ansible.windows.win_ping:
