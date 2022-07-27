@@ -1,8 +1,9 @@
 ---
-- name: win_ping module demo
-  hosts: windows
+- name: win
+  hosts: IMPRESSAO
   become: false
   gather_facts: false
   tasks:
-    - name: test connection
-      ansible.windows.win_ping:
+    - name: 'Reinciando o computador'
+      ansible.windows.win_reboot:
+        reboot_timeout: 3600
