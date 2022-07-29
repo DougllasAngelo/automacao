@@ -1,9 +1,273 @@
 ---
-- name: win
+- name: Instalacao OFF
   hosts: IMPRESSAO
   become: false
   gather_facts: false
+  remote_user: ansible
+  become_user: ansible
+
   tasks:
-    - name: 'Reinciando o computador'
-      ansible.windows.win_reboot:
-        reboot_timeout: 3600
+  - name: Criando pasta Drivers e Utilitarios
+    ansible.windows.win_powershell:
+      script: |
+        cd /
+        mkdir "Drivers e Utilitarios"
+
+  - name: Verificando arquivos necessarios e removendo lixo Setup_CHShop
+    ansible.windows.win_powershell:
+      script: |
+        Remove-Item -path 'C:\CHIANCA\' -recurse
+
+  - name: Verificando arquivos necessarios e removendo lixo pasta Chianca Softwares
+    ansible.windows.win_powershell:
+      script: |
+        Remove-Item -path 'C:\Program Files (x86)\Chianca Softwares\' -recurse
+           
+  - name: Download CHShop
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/x90TGZ17XcMN4uG/download
+      dest: C:\Drivers e Utilitarios\Setup_CHShop.exe
+
+  - name: Extraindo arquivos necessarios
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Setup_CHShop.exe
+      state: present
+
+  - name: Criando pasta Chianca Softwares
+    ansible.windows.win_powershell:
+      script: |
+        cd /
+        mkdir "C:\Program Files (x86)\Chianca Softwares" 
+        
+  - name: Download Gsurf
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/ojqkHMDoMKgFgWN/download
+      dest: C:\Drivers e Utilitarios\InstaladorGSurf.exe
+
+  - name: Download CHIntegra
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/bgcz0eoirUqQfp0/download
+      dest: C:\Drivers e Utilitarios\Install_CHIntegra.exe
+
+  - name: Instalando aplicativo CHIntegra
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Install_CHIntegra.exe
+      state: present
+
+  - name: Download MyODBC
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/6Bjc20kSLlHti6M/download
+      dest: C:\Drivers e Utilitarios\Install_ODBC-Connector.exe
+
+  - name: Instalando aplicativo ODBC
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Install_ODBC-Connector.exe
+      state: present
+
+  - name: Download MySql
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/O3eWFbSPx2ZkwMZ/download
+      dest: C:\Drivers e Utilitarios\Instalador_MySql5.exe
+
+  - name: Instalando aplicativo MySql 5.1
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Instalador_MySql5.exe
+      state: present
+
+  - name: Download WSCHnet
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/BZ7zh95jAglf5q7/download
+      dest: C:\Chianca\WSCHnet.zip
+
+  - name: extrair WSCHnet
+    ansible.windows.win_powershell:
+      script: |
+        Expand-Archive -Path C:\CHIANCA\WS_CHNet.zip -DestinationPath C:\CHIANCA\WS_CHNet
+
+  - name: Download Fontes
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/TEDVl1aDZPf4aWQ/download
+      dest: C:\Drivers e Utilitarios\Instalador_Fontes.exe
+
+  - name: Instalando as Fontes
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Instalador_Fontes.exe
+      state: present
+
+  - name: Criando pasta dos instaladores de impressora
+    ansible.windows.win_powershell:
+      script: |
+        cd /
+        mkdir "Drivers e Utilitarios\Impressoras"    
+
+  - name: Download drivers de impressora Bematech
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/acO6qxgHVVPe5D1/download
+      dest: C:\Drivers e Utilitarios\Impressoras\Bematech.exe
+
+  - name: Instalador Bematech
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Impressoras\Bematech.exe
+      state: present
+
+  - name: Download drivers de impressora Daruma
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/um4YdY5z53hlTZB/download
+      dest: C:\Drivers e Utilitarios\Impressoras\Daruma.exe
+
+  - name: Instalador Daruma
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Impressoras\Daruma.exe
+      state: present
+
+  - name: Download drivers de impressora Epson
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/lIDrD1mfMTLynPX/download
+      dest: C:\Drivers e Utilitarios\Impressoras\Epson.exe
+
+  - name: Instalador Epson
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Impressoras\Epson.exe
+      state: present
+
+  - name: Download drivers de impressora Elgin
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/GGSBCVuWj19ZcGl/download
+      dest: C:\Drivers e Utilitarios\Impressoras\Elgin.exe
+
+  - name: Instalador Elgin
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Impressoras\Elgin.exe
+      state: present
+
+  - name: Criando pasta dos instaladores de impressora
+    ansible.windows.win_powershell:
+      script: |
+        cd /
+        mkdir "Drivers e Utilitarios\CHtools" 
+
+  - name: Download CHtools
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/1Kka3PhFzYsjRsY/download
+      dest: C:\Drivers e Utilitarios\CHtools\CHTools.exe
+
+  - name: Instalando CHtools
+    ansible.windows.win_package:
+      path: C:\Drivers e Utilitarios\Chtools\CHTools.exe
+      state: present
+
+  - name: adicionando regras de firewall 3634
+    ansible.windows.win_powershell:
+      script: |
+        netsh advfirewall firewall add rule name= "Open Port 3634" dir=in action=allow protocol=TCP localport=3634
+
+  - name: adicionando regras de firewall 3306
+    ansible.windows.win_powershell:
+      script: |
+        netsh advfirewall firewall add rule name= "Open Port 3306" dir=in action=allow protocol=TCP localport=3306
+
+  - name: registrando ODBC
+    ansible.windows.win_powershell:
+      script: |
+        c:\windows\syswow64\odbcconf.exe configsysdsn "MySQL ODBC 5.1 Driver" "DSN=CHIANCA;SERVER=127.0.0.1;PORT=3306;DATABASE=CADASTROS;UID=root"
+
+  - name: Instalando IIS (Web-Server and Web-Common-Http)
+    ansible.windows.win_feature:
+      name:
+      - Web-Server
+      - Web-Common-Http
+      state: present
+
+  - name: Install IIS Web-Server e include_management_tools
+    ansible.windows.win_feature:
+      name: Web-Server
+      state: present
+      include_sub_features: yes
+      include_management_tools: yes
+      register: win_feature
+
+  - name: permissao na pasta Chianca Softwares
+    ansible.windows.win_acl:
+      user: everyone
+      path: C:\Program Files (x86)\Chianca Softwares
+      reorganize: present
+      type: present
+      rights: ExecuteFile,Write
+
+  - name: Compartilhando pasta Chianca Softwares
+    ansible.windows.win_share:
+      name: Chianca Softwares
+      description: pasta chianca Softwares
+      path: C:\Program Files (x86)\Chianca Softwares
+      list: yes
+      full: everyone
+      read: Global
+
+  - name: permissao na pasta Chianca
+    ansible.windows.win_acl:
+      user: everyone
+      path: C:\Chianca
+      reorganize: present
+      type: present
+      rights: ExecuteFile,Write
+
+  - name: Compartilhando pasta Chianca
+    ansible.windows.win_share:
+      name: Chianca
+      description: pasta chianca
+      path: C:\Chianca
+      list: yes
+      full: everyone
+      read: Global
+
+  - name: Criando usuario 
+    ansible.windows.win_user:
+      name: USUARIO
+      password: Senhausuario
+      state: present
+      user_cannot_change_password: yes
+      password_never_expires: yes
+      groups:
+        - Administradores
+
+  - name: Controle de acesso do usuário e as permissões
+    ansible.windows.win_powershell:
+      script: |
+        /k %windir%\System32\reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f
+
+  - name: Criando o IIS
+    ansible.windows.win_powershell:
+      script: |
+        New-WebAppPool -name "WS_CHWeb" - force
+        $appPool = Get-Item "IIS: C:\CHIANCA\WS_CHNet"
+        $appPool.processModel.identityType = "ApplicationPoolIdentity"
+        $appPool.enable32BitAppOnWin64 = 0
+        $appPool.managedRuntimeVersion = '4.0'
+        $appPool.autoStart = 'true'
+
+  - name: Adicionando permissao na pasta Chianca e Chianca Softwares no Windows Defender
+    ansible.windows.win_powershell:
+      script: |
+        Add-MpPreference -ExclusionPath C:\CHIANCA
+        Add-MpPreference -ExclusionPath C:\Program Files (x86)\Chianca Softwares
+
+  - name: Download Plano de energia
+    ansible.windows.win_get_url:
+      url: https://ip225.ip-149-56-155.net/owncloud/s/48njvgwxBF32xMB/download
+      dest: C:\Drivers e Utilitarios\Plano de energia\
+
+  - name: Adicionando o plano de energia
+    ansible.windows.win_powershell:
+      script: |
+        cd /
+        cd C:\Drivers e Utilitarios\
+        powercfg /import servidor.pow
+
+  - name: Alterando formato de data
+    ansible.windows.win_powershell:
+      script: |
+        get-date -uformat "%D / %y"
+
+  - name: reiniciando o computador
+    ansible.windows.win_reboot:
+    when: res.reboot_required
