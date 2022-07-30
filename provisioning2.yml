@@ -3,70 +3,58 @@
   hosts: IMPRESSAO
   become: false
   gather_facts: false
-  remote_user: ansible
-  become_user: ansible
+  remote_user: nomeDoUsuario
 
   tasks:
-  - name: Criando pasta Drivers e Utilitarios
+  - name: Criando pasta
     ansible.windows.win_powershell:
       script: |
         cd /
         mkdir "Drivers e Utilitarios"
 
-  - name: Verificando arquivos necessarios e removendo lixo Setup_CHShop
+  - name: Verificando arquivos necessarios e removendo lixo Setup
     ansible.windows.win_powershell:
       script: |
-        Remove-Item -path 'C:\CHIANCA\' -recurse
-
-  - name: Verificando arquivos necessarios e removendo lixo pasta Chianca Softwares
-    ansible.windows.win_powershell:
-      script: |
-        Remove-Item -path 'C:\Program Files (x86)\Chianca Softwares\' -recurse
+        Remove-Item -path 'C:\REMOVENDO DIRETORIO\' -recurse
            
-  - name: Download CHShop
+  - name: Download SETUP
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/x90TGZ17XcMN4uG/download
-      dest: C:\Drivers e Utilitarios\Setup_CHShop.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Setup.exe
 
   - name: Extraindo arquivos necessarios
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Setup_CHShop.exe
-      state: present
-
-  - name: Criando pasta Chianca Softwares
-    ansible.windows.win_powershell:
-      script: |
-        cd /
-        mkdir "C:\Program Files (x86)\Chianca Softwares" 
+      path: C:\Drivers e Utilitarios\Setup.exe
+      state: present 
         
-  - name: Download Gsurf
+  - name: Download 
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/ojqkHMDoMKgFgWN/download
-      dest: C:\Drivers e Utilitarios\InstaladorGSurf.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Instalador.exe
 
-  - name: Download CHIntegra
+  - name: Download
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/bgcz0eoirUqQfp0/download
-      dest: C:\Drivers e Utilitarios\Install_CHIntegra.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Install.exe
 
-  - name: Instalando aplicativo CHIntegra
+  - name: Instalando aplicativo
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Install_CHIntegra.exe
+      path: C:\Drivers e Utilitarios\Install.exe
       state: present
 
-  - name: Download MyODBC
+  - name: Download
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/6Bjc20kSLlHti6M/download
-      dest: C:\Drivers e Utilitarios\Install_ODBC-Connector.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Install.exe
 
-  - name: Instalando aplicativo ODBC
+  - name: Instalando aplicativo
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Install_ODBC-Connector.exe
+      path: C:\Drivers e Utilitarios\Install.exe
       state: present
 
   - name: Download MySql
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/O3eWFbSPx2ZkwMZ/download
+      url: LINK HTTPS
       dest: C:\Drivers e Utilitarios\Instalador_MySql5.exe
 
   - name: Instalando aplicativo MySql 5.1
@@ -74,19 +62,19 @@
       path: C:\Drivers e Utilitarios\Instalador_MySql5.exe
       state: present
 
-  - name: Download WSCHnet
+  - name: Download W
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/BZ7zh95jAglf5q7/download
-      dest: C:\Chianca\WSCHnet.zip
+      url: LINK HTTPS
+      dest: C:\W.zip
 
-  - name: extrair WSCHnet
+  - name: extrair W
     ansible.windows.win_powershell:
       script: |
-        Expand-Archive -Path C:\CHIANCA\WS_CHNet.zip -DestinationPath C:\CHIANCA\WS_CHNet
+        Expand-Archive -Path C:\W.zip -DestinationPath C:\W
 
   - name: Download Fontes
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/TEDVl1aDZPf4aWQ/download
+      url: LINK HTTPS
       dest: C:\Drivers e Utilitarios\Instalador_Fontes.exe
 
   - name: Instalando as Fontes
@@ -100,66 +88,66 @@
         cd /
         mkdir "Drivers e Utilitarios\Impressoras"    
 
-  - name: Download drivers de impressora Bematech
+  - name: Download drivers de impressora B
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/acO6qxgHVVPe5D1/download
-      dest: C:\Drivers e Utilitarios\Impressoras\Bematech.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Impressoras\B.exe
 
   - name: Instalador Bematech
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Impressoras\Bematech.exe
+      path: C:\Drivers e Utilitarios\Impressoras\B.exe
       state: present
 
-  - name: Download drivers de impressora Daruma
+  - name: Download drivers de impressora D
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/um4YdY5z53hlTZB/download
-      dest: C:\Drivers e Utilitarios\Impressoras\Daruma.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Impressoras\D.exe
 
   - name: Instalador Daruma
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Impressoras\Daruma.exe
+      path: C:\Drivers e Utilitarios\Impressoras\D.exe
       state: present
 
-  - name: Download drivers de impressora Epson
+  - name: Download drivers de impressora E
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/lIDrD1mfMTLynPX/download
-      dest: C:\Drivers e Utilitarios\Impressoras\Epson.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Impressoras\E.exe
 
   - name: Instalador Epson
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Impressoras\Epson.exe
+      path: C:\Drivers e Utilitarios\Impressoras\E.exe
       state: present
 
-  - name: Download drivers de impressora Elgin
+  - name: Download drivers de impressora E2
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/GGSBCVuWj19ZcGl/download
-      dest: C:\Drivers e Utilitarios\Impressoras\Elgin.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\Impressoras\E2.exe
 
   - name: Instalador Elgin
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Impressoras\Elgin.exe
+      path: C:\Drivers e Utilitarios\Impressoras\E2.exe
       state: present
 
-  - name: Criando pasta dos instaladores de impressora
+  - name: Criando NOVA PASTA
     ansible.windows.win_powershell:
       script: |
         cd /
-        mkdir "Drivers e Utilitarios\CHtools" 
+        mkdir "Drivers e Utilitarios\C" 
 
   - name: Download CHtools
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/1Kka3PhFzYsjRsY/download
-      dest: C:\Drivers e Utilitarios\CHtools\CHTools.exe
+      url: LINK HTTPS
+      dest: C:\Drivers e Utilitarios\CHtools\C.exe
 
   - name: Instalando CHtools
     ansible.windows.win_package:
-      path: C:\Drivers e Utilitarios\Chtools\CHTools.exe
+      path: C:\Drivers e Utilitarios\Chtools\C.exe
       state: present
 
-  - name: adicionando regras de firewall 3634
+  - name: adicionando regras de firewall
     ansible.windows.win_powershell:
       script: |
-        netsh advfirewall firewall add rule name= "Open Port 3634" dir=in action=allow protocol=TCP localport=3634
+        netsh advfirewall firewall add rule name= "Open Port 3000" dir=in action=allow protocol=TCP localport=3000
 
   - name: adicionando regras de firewall 3306
     ansible.windows.win_powershell:
@@ -186,36 +174,19 @@
       include_management_tools: yes
       register: win_feature
 
-  - name: permissao na pasta Chianca Softwares
+  - name: permissao na pasta
     ansible.windows.win_acl:
       user: everyone
-      path: C:\Program Files (x86)\Chianca Softwares
+      path: caminho da pasta
       reorganize: present
       type: present
       rights: ExecuteFile,Write
 
-  - name: Compartilhando pasta Chianca Softwares
+  - name: Compartilhando pasta
     ansible.windows.win_share:
-      name: Chianca Softwares
-      description: pasta chianca Softwares
-      path: C:\Program Files (x86)\Chianca Softwares
-      list: yes
-      full: everyone
-      read: Global
-
-  - name: permissao na pasta Chianca
-    ansible.windows.win_acl:
-      user: everyone
-      path: C:\Chianca
-      reorganize: present
-      type: present
-      rights: ExecuteFile,Write
-
-  - name: Compartilhando pasta Chianca
-    ansible.windows.win_share:
-      name: Chianca
-      description: pasta chianca
-      path: C:\Chianca
+      name: nome do compartilhamento
+      description: descrição da pasta
+      path: caminho da pasta
       list: yes
       full: everyone
       read: Global
@@ -239,21 +210,21 @@
     ansible.windows.win_powershell:
       script: |
         New-WebAppPool -name "WS_CHWeb" - force
-        $appPool = Get-Item "IIS: C:\CHIANCA\WS_CHNet"
+        $appPool = Get-Item "IIS: caminho da pasta IIS"
         $appPool.processModel.identityType = "ApplicationPoolIdentity"
         $appPool.enable32BitAppOnWin64 = 0
         $appPool.managedRuntimeVersion = '4.0'
         $appPool.autoStart = 'true'
 
-  - name: Adicionando permissao na pasta Chianca e Chianca Softwares no Windows Defender
+  - name: Adicionando permissao na pasta no Windows Defender
     ansible.windows.win_powershell:
       script: |
-        Add-MpPreference -ExclusionPath C:\CHIANCA
-        Add-MpPreference -ExclusionPath C:\Program Files (x86)\Chianca Softwares
+        Add-MpPreference -ExclusionPath caminho da pasta
+        Add-MpPreference -ExclusionPath caminho da pasta
 
   - name: Download Plano de energia
     ansible.windows.win_get_url:
-      url: https://ip225.ip-149-56-155.net/owncloud/s/48njvgwxBF32xMB/download
+      url: LINK HTTPS
       dest: C:\Drivers e Utilitarios\Plano de energia\
 
   - name: Adicionando o plano de energia
@@ -261,9 +232,9 @@
       script: |
         cd /
         cd C:\Drivers e Utilitarios\
-        powercfg /import servidor.pow
+        powercfg /import planoDeEnergia.pow
 
-  - name: Alterando formato de data
+  - name: Alterando formato de data do windows
     ansible.windows.win_powershell:
       script: |
         get-date -uformat "%D / %y"
